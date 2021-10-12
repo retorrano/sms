@@ -1,2 +1,2 @@
 import sms
-sms.send_sms("222", "BAL")
+sms.send_sms("+639959064795", "BAL")

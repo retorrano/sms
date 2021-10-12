@@ -13,7 +13,7 @@ def send_sms(num, mes):
 		time.sleep(0.5)
 		phone.write(b'AT+CMGF=1\r')
 		time.sleep(0.5)
-		phone.write(b'AT+CMGS="' + num.encode() + b'"\r')
+		phone.write(b'AT+CMGC="' + num.encode() + b'"\r')
 		time.sleep(0.5)
 		phone.write(mes.encode() + b"\r")
 		time.sleep(0.5)
