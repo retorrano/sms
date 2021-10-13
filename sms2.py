@@ -18,14 +18,14 @@ class TextMessage:
 		time.sleep(1)
 
 	def sendMessage(self):
-		self.ser.write(b'ATZ\r')
+		cmd="AT\r"
+		self.ser.write(cmd.encode())
+		for i in range(1,100):
+			print(self.ser.read(i))
 		time.sleep(1)
 		self.ser.write(b'AT+CMGF=1\r')
 		time.sleep(1)
-		self.ser.write(b'''AT+CMGS="''' + self.recipient.encode() + b'''"\r''')
-		time.sleep(1)
-		self.ser.write(self.content.encode() + b"\r")
-		time.sleep(1)
+		self.ser.write(b'''AT+CMGS="''' + self.recipient.encode() + b'''",145\r''')
 		self.ser.write(bytes(26))
 		time.sleep(1)
 
