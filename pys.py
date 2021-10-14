@@ -1,7 +1,7 @@
 from serial import Serial
 from time import sleep
 from datetime import datetime
-ser = Serial('/dev/ttyUSB4',19200, timeout=0)
+ser = Serial('/dev/ttyUSB0',19200, timeout=2)
 cmd = "AT\r"
 ser.write(cmd.encode())
 print(ser.read(400))
@@ -21,19 +21,20 @@ while succ == "N":
 	cmd = "AT+CSCS=\"GSM\"\r"
 	ser.write(cmd.encode())
 	print(ser.read(400))
-	cmd = "AT+CSCS?\r"
-	ser.write(cmd.encode())
-	sleep(3)
-	print(ser.read(400))
 	cmd = "AT+CMGS=\"+639959064795\",145\rTest Quake\x1A"
 	ser.write(cmd.encode())
 	sleep(3)
 	result = ser.read(400)
 	print(result)
+	cmd = "AT+CSCS=?\r"
+	ser.write(cmd.encode())
+	sleep(3)
+	print(ser.read(400))
 	cmd = "AT+CSCS?\r"
 	ser.write(cmd.encode())
 	sleep(3)
 	print(ser.read(400))
+	
 	if "OK" not in str(result):
 		succ = "N"
 	else:
